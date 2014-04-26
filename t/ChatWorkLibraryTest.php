@@ -1,11 +1,11 @@
 <?php
-require_once(dirname(__DIR__) . '/ChatWork.class.php');
+require_once(dirname(__DIR__) . '/ChatWorkLibrary.class.php');
 
-class ChatWorkTest extends PHPUnit_Framework_TestCase {
+class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
     private $chatwork;
 
     public function setUp() {
-        $this->chatwork = new ChatWork(getenv('CHATWORK_API_KEY'));
+        $this->chatwork = new ChatWorkLibrary(getenv('CHATWORK_API_KEY'));
     }
 
     public function testMe() {

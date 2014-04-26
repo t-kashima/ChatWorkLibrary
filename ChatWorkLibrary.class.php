@@ -1,6 +1,6 @@
 <?php
 
-class ChatWork {
+class ChatWorkLibrary {
     // END POINT
     const BASE_END_POINT = 'https://api.chatwork.com/v1';
 
@@ -17,7 +17,7 @@ class ChatWork {
      * @return 自分自身の情報
      */
     public function getMe() {
-        $url = ChatWork::BASE_END_POINT . '/me';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/me';
         $content = $this->getContentFromUrl($url);
         return $content;        
     }
@@ -27,7 +27,7 @@ class ChatWork {
      * @return 自分の未読数、未読To数、未完了タスク数
      */
     public function getMyStatus() {
-        $url = ChatWork::BASE_END_POINT . '/my/status';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/my/status';
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -47,7 +47,7 @@ class ChatWork {
         if ($status != '') {
             $data['status'] = $status;
         }
-        $url = ChatWork::BASE_END_POINT . '/my/tasks';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/my/tasks';
         $content = $this->getContentFromUrl($url, 'GET', $data);
         return $content;
     }
@@ -57,7 +57,7 @@ class ChatWork {
      * @return 自分のコンタクト一覧
      */
     public function getContacts() {
-        $url = ChatWork::BASE_END_POINT . '/contacts';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/contacts';
         $content = $this->getContentFromUrl($url);
         return $content;        
     }
@@ -67,7 +67,7 @@ class ChatWork {
      * @return 自分のチャット一覧
      */
     public function getRooms() {
-        $url = ChatWork::BASE_END_POINT . '/rooms';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms';
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -107,7 +107,7 @@ class ChatWork {
             $data['members_readonly_ids'] = implode(',', $members_readonly_ids);
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms';        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms';        
         $content = $this->getContentFromUrl($url, 'POST', $data);
         return $content;
     }
@@ -119,7 +119,7 @@ class ChatWork {
      */
     public function getRoomsByRoomId($room_id = -1) {
         assert($room_id != -1, 'ROOM IDを設定して下さい');
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id;        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id;        
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -149,7 +149,7 @@ class ChatWork {
             $data['name'] = $name;
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id;        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id;        
         $content = $this->getContentFromUrl($url, 'PUT', $data);
         return $content;
     }
@@ -164,7 +164,7 @@ class ChatWork {
         assert($action_type != '', '退席するか、削除するかを設定して下さい');        
         
         $data = array('action_type' => $action_type);
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id;        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id;        
         $content = $this->getContentFromUrl($url, 'DELETE', $data);
         return $content;
     }
@@ -178,7 +178,7 @@ class ChatWork {
     public function getRoomsMembersByRoomId($room_id = -1) {
         assert($room_id != -1, 'ROOM IDを設定して下さい');
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/members';        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/members';        
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -200,7 +200,7 @@ class ChatWork {
                       'members_member_ids' => implode(',', $members_member_ids), 
                       'members_readonly_ids' => implode(',', $members_readonly_ids));
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/members';        
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/members';        
         $content = $this->getContentFromUrl($url, 'PUT', $data);
         return $content;
     }
@@ -213,7 +213,7 @@ class ChatWork {
     public function getRoomsMessagesByRoomId($room_id = -1) {
         assert($room_id != -1, 'ROOM IDを設定して下さい');
         
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/messages';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/messages';
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -229,7 +229,7 @@ class ChatWork {
         assert($body != '', '送信するメッセージを設定して下さい');
 
         $data = array('body' => $body);
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/messages';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/messages';
         $content = $this->getContentFromUrl($url, 'POST', $data);
         return $content;
     }
@@ -244,7 +244,7 @@ class ChatWork {
         assert($room_id != -1, 'ROOM IDを設定して下さい');        
         assert($message_id != -1, 'MESSAGE IDを設定して下さい');
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/messages/' . $message_id;
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/messages/' . $message_id;
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -273,7 +273,7 @@ class ChatWork {
             $data['status'] = $status;
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/tasks';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/tasks';
         $content = $this->getContentFromUrl($url, 'GET', $data);
         return $content;
     }    
@@ -299,7 +299,7 @@ class ChatWork {
             $data['limit'] = $limit;
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/tasks';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/tasks';
         $content = $this->getContentFromUrl($url, 'POST', $data);
         return $content;
     }
@@ -314,7 +314,7 @@ class ChatWork {
         assert($room_id != -1, 'ROOM IDを設定して下さい');        
         assert($task_id != -1, 'TASK IDを設定して下さい');        
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/tasks/' . $task_id;
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/tasks/' . $task_id;
         $content = $this->getContentFromUrl($url);
         return $content;
     }
@@ -334,7 +334,7 @@ class ChatWork {
             $data['account_id'] = $account_id;
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/files';
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/files';
         $content = $this->getContentFromUrl($url, 'GET', $data);
         return $content;
     }
@@ -357,7 +357,7 @@ class ChatWork {
             $data['create_download_url'] = $create_download_url;
         }
 
-        $url = ChatWork::BASE_END_POINT . '/rooms/' . $room_id . '/files/' . $file_id;
+        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/files/' . $file_id;
         $content = $this->getContentFromUrl($url, 'GET', $data);
         return $content;
     }
