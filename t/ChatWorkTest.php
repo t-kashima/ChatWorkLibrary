@@ -5,9 +5,7 @@ class ChatWorkTest extends PHPUnit_Framework_TestCase {
     private $chatwork;
 
     public function setUp() {
-        $config = json_decode(file_get_contents(dirname(__DIR__) . "/config.json"));
-        $api_key = $config->{'api_key'};
-        $this->chatwork = new ChatWork($api_key);
+        $this->chatwork = new ChatWork(getenv('CHATWORK_API_KEY'));
     }
 
     public function testMe() {

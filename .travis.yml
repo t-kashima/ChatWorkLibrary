@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.5
+  - 5.4
+before_script: php composer.phar install
+notifications:
+  email: false
+env:
+  global:
+    - secure: "oG/vrjalOk1+im6R75pb+UCcz/VfDnGvNHLO7ddTYbBQEhg+R7KZNqOQwyUtMXJE3DN9Dm6CGCecSTqpufyOyO+6/Gf81ez9OOfBbVFEp0SBJ1dVhz0pdl3EzuHyVKdCMS6LSV6PH6tLU4ZUp8SwaeOuKUKHwoLX5AQbxlQa8L4="
+

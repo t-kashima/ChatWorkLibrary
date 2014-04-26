@@ -5,10 +5,11 @@ class ChatWork {
     const BASE_END_POINT = 'https://api.chatwork.com/v1';
 
     // API KEY
-    private $apiKey = '';
+    private $api_key = '';
 
-    public function __construct($apiKey) {
-        $this->apiKey = $apiKey;
+    public function __construct($api_key = '') {
+        assert($api_key != '', 'API KEYを設定して下さい');
+        $this->api_key = $api_key;
     }
 
     /**
@@ -379,7 +380,7 @@ class ChatWork {
             $url = $url . '?' . $data;
         }
 
-        $header = array('X-ChatWorkToken: ' . $this->apiKey);
+        $header = array('X-ChatWorkToken: ' . $this->api_key);
         $context = array(
                          'http' => array(
                                          'method'  => $method,
