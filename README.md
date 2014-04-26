@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/t-kashima/ChatWorkLibrary.svg?branch=master)](https://travis-ci.org/t-kashima/ChatWork)
 NAME
 ========
-ChatWorkLibrary - ChatWork API wrapper library
+ChatWorkLibrary - ChatWork API library
 
 SYNOPSIS
 ========
