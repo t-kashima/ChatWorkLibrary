@@ -1,14 +1,14 @@
-[![Build Status](https://travis-ci.org/t-kashima/ChatWork.svg?branch=master)](https://travis-ci.org/t-kashima/ChatWork)
+[![Build Status](https://travis-ci.org/t-kashima/ChatWorkLibrary.svg?branch=master)](https://travis-ci.org/t-kashima/ChatWork)
 NAME
 ========
-ChatWork - ChatWork API Library
+ChatWorkLibrary - ChatWork API library
 
 SYNOPSIS
 ========
 ```php
-require_once('ChatWork.class.php');
+require_once('ChatWorkLibrary.class.php');
 
-$chatwork = new ChatWork(CHATWORK_API_KEY);
+$chatwork = new ChatWorkLibrary(CHATWORK_API_KEY);
 // You can post a message in ChatWork.
 $chatwork->postRoomsMessagesByRoomId(CHATWORK_ROOM_ID, 'message');
 ```
