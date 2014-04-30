@@ -6,7 +6,7 @@ before_script:
   - php composer.phar install
 script:
   - mkdir -p build/logs
-  - phpunit -c phpunit.xml --coverage-clover clover.xml
+  - phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
 after_script:
   - php vendor/bin/coveralls -v -c .coveralls.yml
 notifications:
