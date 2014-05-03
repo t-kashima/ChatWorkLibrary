@@ -375,16 +375,13 @@ class ChatWorkLibrary {
 
         // POST/PUT/DELETEの時はBodyにGETの時はURLにつけて送る
         $post_data = "";
-        $header = array();
         if ($method == 'POST' || $method == 'PUT' || $method == 'DELETE') {
             $post_data = $data;
-            array_push($header, 'Content-Type: application/x-www-form-urlencoded');
-            array_push($header, 'Content-Length: ' . strlen($post_data));            
         } else if ($method == 'GET' && $data != "") {
             $url = $url . '?' . $data;
         }
-        array_push($header, 'X-ChatWorkToken: ' . $this->api_key);
 
+        $header = array('X-ChatWorkToken: ' . $this->api_key);
         $context = array(
                          'http' => array(
                                          'method'  => $method,
