@@ -48,6 +48,18 @@ class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
         $result = json_decode($this->chatwork->getRooms());
         $this->assertTrue(is_array($result));
         $this->assertNotEmpty($result[0]);
+
+        // テストのためのアカウントIdを取得する
+        $result = json_decode($this->chatwork->getMe());
+        $account_id = $result->{'account_id'};
+
+        $result = json_decode($this->chatwork->postRooms('Room name', array($account_id), 'Hello, world', 'group'));
+        $room_id = $result->{'room_id'};        
+        $this->assertNotEmpty($room_id);
+
+        $result = json_decode($this->chatwork->getRoomsByRoomId($room_id));
+        $this->assertEquals($result->{'room_id'}, $room_id);
         
+        $this->chatwork->deleteRoomsByRoomId($room_id, 'delete');        
     }
 }
