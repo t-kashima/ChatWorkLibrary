@@ -382,6 +382,7 @@ class ChatWorkLibrary {
         }
 
         $header = array('X-ChatWorkToken: ' . $this->api_key);
+
         $context = array(
                          'http' => array(
                                          'method'  => $method,

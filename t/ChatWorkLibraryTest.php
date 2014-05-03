@@ -8,19 +8,9 @@ class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
         $this->chatwork = new ChatWorkLibrary(getenv('CHATWORK_API_KEY'));
-
-        // テストのためのアカウントIdを取得する
-        $result = json_decode($this->chatwork->getMe());
-        $this->account_id = $result->{'account_id'};
-
-        // テストのためのルームを作成する
-        $result = json_decode($this->chatwork->postRooms('Room name', array($this->account_id)));
-        $this->room_id = $result->{'room_id'};
     }
 
     public function tearDown() {
-        /* // テストのためのルームを削除する */
-        $this->chatwork->deleteRoomsByRoomId($this->room_id, 'delete');
     }
 
     public function testMe() {
@@ -32,11 +22,21 @@ class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
         $result = json_decode($this->chatwork->getMyStatus());        
         $this->assertTrue(array_key_exists('mention_room_num', $result));        
 
-        $result = json_decode($this->chatwork->postRoomsTasksByRoomId($this->room_id, 'Task', array($this->account_id)));
+        // テストのためのアカウントIdを取得する
+        $result = json_decode($this->chatwork->getMe());
+        $account_id = $result->{'account_id'};
 
-        $result = json_decode($this->chatwork->getMyTasks($this->account_id, 'open'));
-        $this->assertEquals($result[0]->{'assigned_by_account'}->{'account_id'}, $this->account_id);
+        // テストのためのルームを作成する
+        $result = json_decode($this->chatwork->postRooms('Room name', array($account_id)));
+        $room_id = $result->{'room_id'};
+
+        $result = json_decode($this->chatwork->postRoomsTasksByRoomId($room_id, 'Task', array($account_id)));
+        $result = json_decode($this->chatwork->getMyTasks($account_id, 'open'));
+        $this->assertEquals($result[0]->{'assigned_by_account'}->{'account_id'}, $account_id);
         $this->assertEquals($result[0]->{'status'}, 'open');
+
+        // テストのためのルームを削除する
+        $this->chatwork->deleteRoomsByRoomId($room_id, 'delete');
     }
 
     public function testContacts() {
