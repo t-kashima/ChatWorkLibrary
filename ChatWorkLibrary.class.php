@@ -373,20 +373,22 @@ class ChatWorkLibrary {
     private function getContentFromUrl($url, $method = 'GET', $data = array()) {
         $data = http_build_query($data, '', '&'); 
 
+        $header = array('X-ChatWorkToken: ' . $this->api_key);
+
         // POST/PUT/DELETEの時はBodyにGETの時はURLにつけて送る
         $post_data = "";
         if ($method == 'POST' || $method == 'PUT' || $method == 'DELETE') {
             $post_data = $data;
+            array_push($header, 'Content-Type: application/x-www-form-urlencoded');
+            array_push($header, 'Content-Length: ' . strlen($post_data));
         } else if ($method == 'GET' && $data != "") {
             $url = $url . '?' . $data;
         }
 
-        $header = array('X-ChatWorkToken: ' . $this->api_key);
-
         $context = array(
                          'http' => array(
                                          'method'  => $method,
-                                         'header'  => implode('\r\n', $header),
+                                         'header'  => implode("\r\n", $header),
                                          'content' => $post_data
                                          )
                          );
