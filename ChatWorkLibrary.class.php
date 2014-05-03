@@ -107,6 +107,7 @@ class ChatWorkLibrary {
             $data['members_readonly_ids'] = implode(',', $members_readonly_ids);
         }
 
+
         $url = ChatWorkLibrary::BASE_END_POINT . '/rooms';        
         $content = $this->getContentFromUrl($url, 'POST', $data);
         return $content;
