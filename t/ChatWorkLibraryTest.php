@@ -96,7 +96,7 @@ class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
         $result = json_decode($this->chatwork->getRoomsFilesByRoomId($room_id, $account_id));        
         $this->assertEquals(count($result), 0);
 
-        $result = json_decode($this->chatwork->getRoomsFilesByRoomIdAndFileId($room_id, 123, false));
+        $result = json_decode($this->chatwork->getRoomsFilesByRoomIdAndFileId($room_id, 123, true));
         $this->assertNotEmpty($result);
 
         $this->chatwork->deleteRoomsByRoomId($room_id, 'delete');        
