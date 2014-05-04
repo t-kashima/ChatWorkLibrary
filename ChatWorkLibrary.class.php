@@ -109,7 +109,6 @@ class ChatWorkLibrary {
 
         $url = ChatWorkLibrary::BASE_END_POINT . '/rooms';        
         $content = $this->getContentFromUrl($url, 'POST', $data);
-
         return $content;
     }
 
@@ -211,13 +210,14 @@ class ChatWorkLibrary {
      * @param $room_id ROOM ID
      * @return チャットのメッセージ一覧
      */    
-    public function getRoomsMessagesByRoomId($room_id = -1) {
-        assert($room_id != -1, 'ROOM IDを設定して下さい');
+    /* public function getRoomsMessagesByRoomId($room_id = -1) { */
+    /*     assert($room_id != -1, 'ROOM IDを設定して下さい'); */
         
-        $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/messages';
-        $content = $this->getContentFromUrl($url);
-        return $content;
-    }
+    /*     $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/messages'; */
+    /*     $content = $this->getContentFromUrl($url); */
+
+    /*     return $content; */
+    /* } */
 
     /**
      * @brief チャットに新しいメッセージを追加
