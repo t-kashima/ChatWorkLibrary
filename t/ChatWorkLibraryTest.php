@@ -59,7 +59,33 @@ class ChatWorkLibraryTest extends PHPUnit_Framework_TestCase {
 
         $result = json_decode($this->chatwork->getRoomsByRoomId($room_id));
         $this->assertEquals($result->{'room_id'}, $room_id);
+
+        $result = json_decode($this->chatwork->putRoomsByRoomId($room_id, 'description', 'document', 'Hello'));        
+        $this->assertEquals($result->{'room_id'}, $room_id);
         
+        $result = json_decode($this->chatwork->getRoomsMembersByRoomId($room_id));                
+        $this->assertEquals($result[0]->{'account_id'}, $account_id);
+
+        $result = json_decode($this->chatwork->postRoomsMessagesByRoomId($room_id, 'Hello, world'));
+        $message_id = $result->{'message_id'};
+        $this->assertNotEmpty($message_id);
+
+        $resut = json_decode($this->chatwork->getRoomsMessagesByRoomIdAndMessageId($room_id, $message_id));
+        $this->assertEquals($result->{'message_id'}, $message_id);        
+
+        $result = json_decode($this->chatwork->postRoomsTasksByRoomId($room_id, 'Task', array($account_id), 0));
+        $this->assertTrue(is_array($result->{'task_ids'}));
+        $task_id = $result->{'task_ids'}[0];
+
+        $result = json_decode($this->chatwork->getRoomsTasksByRoomId($room_id, $account_id, $account_id, 'open'));
+        $this->assertEquals($result[0]->{'task_id'}, $task_id);
+
+        $result = json_decode($this->chatwork->getRoomsTasksByRoomIdAndTaskId($room_id, $task_id));
+        $this->assertEquals($result->{'task_id'}, $task_id);
+        
+        $result = json_decode($this->chatwork->getRoomsFilesByRoomId($room_id, $account_id));        
+        $this->assertEquals(count($result), 0);
+
         $this->chatwork->deleteRoomsByRoomId($room_id, 'delete');        
     }
 }
