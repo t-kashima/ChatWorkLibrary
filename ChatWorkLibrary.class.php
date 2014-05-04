@@ -195,10 +195,16 @@ class ChatWorkLibrary {
                                             $members_member_ids = array(), $members_readonly_ids = array()) {
         assert($room_id != -1, 'ROOM IDを設定して下さい');
         assert(empty($members_admin_ids) == false, '管理者権限のユーザーIDの配列を設定して下さい');
-        
-        $data = array('members_admin_ids' => implode(',', $members_admin_ids),
-                      'members_member_ids' => implode(',', $members_member_ids), 
-                      'members_readonly_ids' => implode(',', $members_readonly_ids));
+
+        // 引数があるパラメータだけ設定する
+        $data = array();
+        $data['members_admin_ids'] = implode(',', $members_admin_ids);
+        if (empty($members_member_ids) == false) {
+            $data['members_member_ids'] = implode(',', $members_member_ids);
+        }
+        if (empty($members_readonly_ids) == false) {
+            $data['members_readonly_ids'] = implode(',', $members_readonly_ids);
+        }
 
         $url = ChatWorkLibrary::BASE_END_POINT . '/rooms/' . $room_id . '/members';        
         $content = $this->getContentFromUrl($url, 'PUT', $data);
